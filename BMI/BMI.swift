@@ -15,11 +15,11 @@ enum BMIErrors: Error {
     var localizedDescription: String {
         switch self {
         case .weightError:
-            return "Wrong weight"
+            return "Неверный вес"
         case .heightError:
-            return "Wrong height"
+            return "Неверная высота"
         case .sexError:
-            return "Wrong sex"
+            return "Неверный пол"
         }
     }
 }

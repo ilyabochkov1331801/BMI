@@ -32,16 +32,28 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                               isIdealWeightNeed: showIdealWeightSwitch.isOn,
                               sex: showIdealWeightSwitch.isOn ? convertToSex(selectedSegmentIndex: sexSegmentedControl.selectedSegmentIndex) : nil)
             let bmiViewController = BMIViewController(bmi: bmi)
-            present(bmiViewController, animated: true, completion: nil)
+            present(bmiViewController, animated: true)
         } catch {
-            let errorAlertController = UIAlertController(title: "Error",
-                                                         message: error as? BMIErrors != nil ? (error as! BMIErrors).localizedDescription : "Unknown error" ,
+            let errorAlertController = UIAlertController(title: "Ошибка",
+                                                         message: error as? BMIErrors != nil ? (error as! BMIErrors).localizedDescription : "Неизвестная ошибка" ,
                                                          preferredStyle: .alert)
-            let errorAlertAction = UIAlertAction(title: "OK",
-                                                 style: .default,
-                                                 handler: nil)
-            errorAlertController.addAction(errorAlertAction)
-            present(errorAlertController, animated: true, completion: nil)
+            let errorAlertActionOk = UIAlertAction(title: "OK",
+                                                 style: .default)
+            
+            let errorAlertActionClear = UIAlertAction(title: "Очистить",
+                                                      style: .destructive) {
+                                                        [weak self] (_) in
+                                                        switch error {
+                                                        case BMIErrors.weightError:
+                                                            self?.weightTextField.text = ""
+                                                        case BMIErrors.heightError:
+                                                            self?.heightTextField.text = ""
+                                                        default: break
+                                                        }
+            }
+            errorAlertController.addAction(errorAlertActionClear)
+            errorAlertController.addAction(errorAlertActionOk)
+            present(errorAlertController, animated: true)
         }
     }
     //MARK: Functions
