@@ -17,7 +17,7 @@ enum BMIErrors: Error {
         case .weightError:
             return "Неверный вес"
         case .heightError:
-            return "Неверная высота"
+            return "Неверный рост"
         case .sexError:
             return "Неверный пол"
         }

@@ -61,7 +61,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
     }
     @objc func showIdealWeightSwitchChanged(paramTarget: UISwitch) {
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
             [weak self] () in
             self?.sexSegmentedControl.isHidden = !paramTarget.isOn
             self?.view.layoutIfNeeded()
